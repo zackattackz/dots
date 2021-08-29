@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Courtesy of https://intoli.com/blog/exit-on-errors-in-bash-scripts/
+exit_on_error() {
+    exit_code=$1
+    last_command=${@:2}
+    if [ $exit_code -ne 0 ]; then
+        >&2 echo "\"${last_command}\" command failed with exit code ${exit_code}."
+        exit $exit_code
+    fi
+}
+
+# enable !! command completion
+set -o history -o histexpand
+
+# Check to ensure $DOTS_BRANCH is set
+if [ -n "$DOTS_BRANCH" ]; then
+	echo '$DOTS_BRANCH is not set'
+	exit 1
+fi
+
+# List of all branch names
+branches=$(git for-each-ref --format='%(refname:short)' refs/heads/)
+
+# Check to ensure $DOTS_BRANCH is a branch in the repo
+branch_exists=false
+for branch_name in "${branches[@]}" do
+	if [ "$DOTS_BRANCH" = "$branch_name" ]; then
+		branch_exists=true
+		break
+	fi
+done
+if [ "$branch_exists" = false ]; then
+	echo '$DOTS_BRANCH'" (set to $DOTS_BRANCH) is not a branch in the repo"
+fi
+
+
+cd `dirname $0`
+
+git switch common
+git add .
+git commit -m "updating common"
+git push
+exit_on_error $? !!
+git switch "$DOTS_BRANCH"
+git add .
+git commit -m "updating $DOTS_BRANCH"
+git push
+exit_on_error $? !!
