@@ -24,7 +24,7 @@ branches=$(git for-each-ref --format='%(refname:short)' refs/heads/)
 
 # Check to ensure $DOTS_BRANCH is a branch in the repo
 branch_exists=false
-for branch_name in "${branches[@]}" do
+for branch_name in "${branches[@]}"; do
 	if [ "$DOTS_BRANCH" = "$branch_name" ]; then
 		branch_exists=true
 		break
