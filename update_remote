@@ -53,3 +53,4 @@ if [ $? -ne 0 ]; then
 	>&2 echo "error: pushing to $DOTS_BRANCH failed"
 	exit $exit_code
 fi
+git switch common
