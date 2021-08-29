@@ -41,9 +41,15 @@ git switch common
 git add .
 git commit -m "updating common"
 git push
-exit_on_error $? !!
+if [ $? -ne 0 ]; then
+	>&2 echo 'error: pushing to common failed'
+	exit $exit_code
+fi
 git switch "$DOTS_BRANCH"
 git add .
 git commit -m "updating $DOTS_BRANCH"
 git push
-exit_on_error $? !!
+if [ $? -ne 0 ]; then
+	>&2 echo "error: pushing to $DOTS_BRANCH failed"
+	exit $exit_code
+fi
