@@ -1,46 +1,27 @@
 #!/bin/bash
 
-# enable !! command completion
-set -o history -o histexpand
+./check_dots_branch
 
-# Check to ensure $DOTS_BRANCH is set
-if [ -z "$DOTS_BRANCH" ]; then
-	echo '$DOTS_BRANCH is not set'
-	exit 1
+if [ $? -ne 0 ]; then
+	exit $?
 fi
-
-# List of all branch names
-branches=$(git for-each-ref --format='%(refname:short)' refs/heads/)
-
-# Check to ensure $DOTS_BRANCH is a branch in the repo
-branch_exists=false
-for branch_name in "${branches[@]}"; do
-	if [ "$DOTS_BRANCH" = "$branch_name" ]; then
-		branch_exists=true
-		break
-	fi
-done
-if [ "$branch_exists" = false ]; then
-	echo '$DOTS_BRANCH'" (set to $DOTS_BRANCH) is not a branch in the repo"
-fi
-
 
 cd `dirname $0`
 
 git switch common
-git add .
+git add home
 git commit -m "updating common"
 git push
 if [ $? -ne 0 ]; then
 	>&2 echo 'error: pushing to common failed'
-	exit $exit_code
+	exit $?
 fi
 git switch "$DOTS_BRANCH"
-git add .
+git add home
 git commit -m "updating $DOTS_BRANCH"
 git push
 if [ $? -ne 0 ]; then
 	>&2 echo "error: pushing to $DOTS_BRANCH failed"
-	exit $exit_code
+	exit $?
 fi
 git switch common

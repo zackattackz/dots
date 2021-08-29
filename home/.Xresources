@@ -1,0 +1,30 @@
+Xft.dpi: 96
+
+URxvt.keysym.Control-Up:     \033[1;5A
+URxvt.keysym.Control-Down:   \033[1;5B
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5C
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+URxvt.perl-ext-common:  ...,resize-font,...
+
+XTerm*vt100.translations: #override \
+    Shift Ctrl <Key> C: copy-selection(CLIPBOARD) \n\
+    Shift Ctrl <Key> V: insert-selection(CLIPBOARD)
+
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.internalBorder: 12
+URxvt.scrollBar: false
+!URxvt.font: xft:iosevka-regular:pixelsize=17
+URxvt.font: xft:Hack:style=Regular:pixelsize=17, xft:FontAwesome:pixelsize=15
+!URxvt.boldFont: xft:iosevka-bold:style=bold:pixelsize=17, -wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1
+URxvt.boldFont: xft:Hack:style=Bold:pixelsize=17
+URxvt.intensityStyles: false
+

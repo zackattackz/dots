@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Check to ensure $DOTS_BRANCH is set
+if [ -z "$DOTS_BRANCH" ]; then
+	>&2 echo '$DOTS_BRANCH is not set'
+	exit 1
+fi
+
+# List of all branch names
+branches=$(git for-each-ref --format='%(refname:short)' refs/heads/)
+
+# Check to ensure $DOTS_BRANCH is a branch in the repo
+branch_exists=false
+for branch_name in "${branches[@]}"; do
+	if [ "$DOTS_BRANCH" = "$branch_name" ]; then
+		branch_exists=true
+		break
+	fi
+done
+if [ "$branch_exists" = false ]; then
+	>&2 echo '$DOTS_BRANCH'" (set to $DOTS_BRANCH) is not a branch in the repo"
+	exit 2
+fi
