@@ -14,7 +14,7 @@ exit_on_error() {
 set -o history -o histexpand
 
 # Check to ensure $DOTS_BRANCH is set
-if [ -n "$DOTS_BRANCH" ]; then
+if [ -z "$DOTS_BRANCH" ]; then
 	echo '$DOTS_BRANCH is not set'
 	exit 1
 fi
