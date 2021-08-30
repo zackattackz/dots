@@ -19,25 +19,25 @@ fi
 
 cd `dirname $0`
 
+git switch common
+git pull
+
 case "$1" in
 	"-in")
-		git switch common
 		rsync -r home ~/
 		git switch "$DOTS_BRANCH"
+		git pull
 		rsync -r home ~/
 		;;
 	"-out")
-		git switch common
 		copy_to_repo_home
 		git add .
 		git commit -m "updating common"
 		git switch "$DOTS_BRANCH"
+		git pull
 		copy_to_repo_home
 		git add .
 		git commit -m "updating $DOTS_BRANCH"
 esac
-
 git switch common
-
-
-
+git push
