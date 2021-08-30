@@ -9,6 +9,14 @@ copy_to_repo_home () {
 	cd ..
 }
 
+copy_from_repo_home () {
+	cd home
+	for filename in $(find . -type f | cut -c 3-); do
+		mkdir -p "$(dirname "$HOME/filename")" && cp -rv "$filename" "$HOME/$filename"
+	done
+	cd ..
+}
+
 
 # Check that $DOTS_BRANCH is properly defined
 ./check_dots_branch
@@ -24,10 +32,10 @@ git pull
 
 case "$1" in
 	"-in")
-		rsync -r --ignore-times home ~/
+		copy_from_repo_home
 		git switch "$DOTS_BRANCH"
 		git pull
-		rsync -r --ignore-times home ~/
+		copy_from_repo_home
 		;;
 	"-out")
 		copy_to_repo_home
