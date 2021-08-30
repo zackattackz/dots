@@ -33,11 +33,12 @@ case "$1" in
 		copy_to_repo_home
 		git add .
 		git commit -m "updating common"
+		git push
 		git switch "$DOTS_BRANCH"
 		git pull
 		copy_to_repo_home
 		git add .
 		git commit -m "updating $DOTS_BRANCH"
+		git push
 esac
 git switch common
-git push
