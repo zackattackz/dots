@@ -24,10 +24,10 @@ git pull
 
 case "$1" in
 	"-in")
-		rsync -r home ~/
+		rsync -r --ignore-times home ~/
 		git switch "$DOTS_BRANCH"
 		git pull
-		rsync -r home ~/
+		rsync -r --ignore-times home ~/
 		;;
 	"-out")
 		copy_to_repo_home
