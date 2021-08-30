@@ -1,5 +1,15 @@
 #!/bin/bash
 
+
+copy_to_repo_home () {
+	cd home
+	for filename in $(find . -type f | cut -c 3-); do
+		cp -rv "$HOME/$filename" "$filename"
+	done
+	cd ..
+}
+
+
 # Check that $DOTS_BRANCH is properly defined
 ./check_dots_branch
 
@@ -15,11 +25,16 @@ case "$1" in
 		rsync -r home ~/
 		git switch "$DOTS_BRANCH"
 		rsync -r home ~/
+		;;
 	"-out")
 		git switch common
-		rsync --existing -r ~/ home
+		copy_to_repo_home
+		git add .
+		git commit -m "updating common"
 		git switch "$DOTS_BRANCH"
-		rsync --existing -r ~/ home
+		copy_to_repo_home
+		git add .
+		git commit -m "updating $DOTS_BRANCH"
 esac
 
 git switch common
