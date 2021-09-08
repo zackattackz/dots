@@ -202,7 +202,7 @@ interface = ${env:WIRELESSDEVICE:}
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
+format-connected-underline = ${colors.secondary}
 label-connected = %essid%  %downspeed%  %upspeed%
 
 
@@ -302,7 +302,7 @@ adapter = ADP1
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging-underline = ${colors.primary}
 
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
