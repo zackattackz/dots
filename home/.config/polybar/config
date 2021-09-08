@@ -17,15 +17,13 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+background = ${xrdb:color0:#222}
+background-alt = ${xrdb:color1:#444}
+foreground = ${xrdb:color7:#222}
+foreground-alt = ${xrdb:color8:#898988}
+primary = ${xrdb:color12:#ffb52a}
+secondary = ${xrdb:color14:#e60053}
+alert = ${xrdb:color11:#bd2c40}
 
 [bar/example]
 monitor = ${env:MONITOR:}
@@ -51,14 +49,15 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
+;font-0 = fixed:pixelsize=10;1
+font-0 = iosevka:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = IPAGothic:pixelsize=10;1
 
 modules-left = i3
 modules-center = mpd
-modules-right = filesystem xbacklight alsa pulseaudio memory wlan eth battery date powermenu
+modules-right = filesystem xbacklight pulseaudio memory wlan eth battery date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -186,7 +185,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-underline = ${colors.secondary}
 label = %percentage:2%%
 
 [module/memory]
@@ -194,7 +193,7 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-underline = ${colors.secondary}
 label = %percentage_used%%
 
 [module/wlan]
@@ -226,7 +225,7 @@ type = internal/network
 interface = ${env:ETHDEVICE:}
 interval = 3.0
 
-format-connected-underline = #55aa55
+format-connected-underline = ${colors.secondary}
 ;" "
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
@@ -234,7 +233,7 @@ label-connected =  %downspeed%  %upspeed%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
+format-disconnected-underline = ${colors.alert}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
@@ -250,36 +249,23 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-underline = ${colors.secondary}
 
 label = %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
-
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
-
-label-muted = 🔇 muted
+format-volume = <ramp-volume> <label-volume>
+bar-volume-empty-foreground = ${colors.secondary}
+format-volume-foreground = ${colors.primary}
+format-muted-foreground  = ${colors.primary}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+label-muted =  muted
 label-muted-foreground = #666
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/alsa]
 type = internal/alsa
@@ -369,9 +355,9 @@ expand-right = true
 format-spacing = 1
 
 label-open = 
-label-open-foreground = ${colors.secondary}
+label-open-foreground = ${colors.alert}
 label-close =  cancel
-label-close-foreground = ${colors.secondary}
+label-close-foreground = ${colors.alert}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
