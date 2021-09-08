@@ -13,5 +13,6 @@ blueberry-tray &
 picom &
 dunst &
 fcitx &
+mopidy &
 nvidia-settings --load-config-only
 exec i3
