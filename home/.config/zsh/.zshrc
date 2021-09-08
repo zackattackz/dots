@@ -5,6 +5,7 @@ plugins=(
 )
 source ~/.config/oh-my-zsh/oh-my-zsh.sh
 source <(go env)
+source ~/.config/private_env
 export PATH=$PATH:$GOPATH/bin
 
 # Import colorscheme from 'wal' asynchronously
