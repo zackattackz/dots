@@ -36,6 +36,10 @@
 
 (require 'mozc)
 (use-package prettier-js)
+(use-package ewal
+  :init (setq ewal-json-file "~/.cache/wal/colors.json")
+)
+(setq reee (ewal-load-colors))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
