@@ -9,6 +9,6 @@ xset +fp /home/zach/.fonts
 xset fp rehash
 blueberry-tray &
 picom &
-dunst &
+$HOME/.config/dunst/launchdunst.sh
 fcitx &
 exec i3
