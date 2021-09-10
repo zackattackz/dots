@@ -69,6 +69,9 @@ bindsym $mod+m exec i3-sensible-terminal -e ncmpcpp
 # start firefox
 bindsym $mod+w exec --no-startup-id $BROWSER
 
+# start doom
+bindsym $mod+c exec --no-startup-id doom run
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
