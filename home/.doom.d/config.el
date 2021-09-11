@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Zachary Hanham"
+      user-mail-address "z.hanham00@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -32,13 +32,13 @@
 (setq org-directory "~/org/")
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type "relative")
 
 (require 'mozc)
 (use-package prettier-js)
 (use-package ewal
   :init (setq ewal-json-file "~/.cache/wal/colors.json")
-)
+  )
 (setq reee (ewal-load-colors))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -59,3 +59,14 @@
 (map! :leader
       :desc "mozc"
       "t J" #'mozc-mode)
+
+(defun compile-latex ()
+  "Sync org file to Raspberry Pi with external script."
+  (when (eq major-mode 'latex-mode)
+    (recompile)))
+
+(add-hook 'LaTeX-mode-hook (lambda ()
+                             (progn
+                               (setq compile-command (concat "pdflatex " (file-name-nondirectory (buffer-file-name))))
+                               (add-hook 'after-save-hook #'compile-latex)
+                               )))
