@@ -70,3 +70,10 @@
                                (setq compile-command (concat "pdflatex " (file-name-nondirectory (buffer-file-name))))
                                (add-hook 'after-save-hook #'compile-latex)
                                )))
+
+
+(require 'org-gcal)
+(setq org-gcal-client-id "448352391473-0p72tent6o3c5iaegejm1m63r313eq70.apps.googleusercontent.com"
+      org-gcal-client-secret (getenv "CALENDARSECRET")
+      org-gcal-fetch-file-alist '(("z.hanham00@gmail.com" .  "~/org/gcal.org"))
+)
