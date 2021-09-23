@@ -222,3 +222,5 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
+
+for_window [class="firefox" title="File Upload"] resize set 1000 650
