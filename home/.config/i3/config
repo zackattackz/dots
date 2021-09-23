@@ -223,4 +223,4 @@ bindsym $mod+r mode "resize"
 #}
 exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
 
-for_window [class="firefox" title="File Upload"] resize set 1000 650
+for_window [class="firefox" title="File Upload"] resize set 1000 650, move position center
