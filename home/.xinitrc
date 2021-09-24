@@ -12,6 +12,7 @@ xset fp rehash
 mopidy &
 nvidia-settings --load-config-only
 fcitx &
+guake &
 if [[ "$SESSION_TYPE" == "i3" ]]; then
 	picom &
 	blueberry-tray &
