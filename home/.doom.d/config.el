@@ -77,3 +77,41 @@
       org-gcal-client-secret (getenv "CALENDARSECRET")
       org-gcal-fetch-file-alist '(("z.hanham00@gmail.com" .  "~/org/gcal.org"))
 )
+
+;; Remove help text
+;;(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+;;(add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1) (hl-line-mode -1))
+;;(setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
+
+(defun doom-dashboard-draw-custom-ascii-banner-fn ()
+  (let* ((banner
+          '(".　　　　　　　　　　 ✦ 　　　　   　 　　　˚　　　　　　　　　　☄　　　　　　　　　　   "
+            "　　　　　　　　　　　　　.　　　☄　　　　　　　　 　　　. 　　 　　　　　　　 ✦ 　　　　　　　　　　 　 ‍ ‍ "
+            "‍ ‍ 　　　　 　　　　　　　　　　　　,　　   　 .　　　　　　　　　　　　　.　　　ﾟ　  　　　.　　　　　　　"
+            "✦ 　　☄　　　　,　　　　　　　.　　　　　　    　　　　 　　　　　　　　　　　　　　　　　　  . ☀"
+            "　　　　　　　　　　　　　　　　　　    　      　☄　　　　        　　　　　　　　　　　　　. 　　　　　　　　."
+            "　　　　　　　　　　　　　.　　　　　　       　   　　　　 　　　　　　　　　　　　　　　　       　   "
+            "　　　　　🛰️　　　　　　　　　　　       　    ✦ 　   　　　,　　　🪐　　　　　　　　  　　　　 　　,　　　 ‍ ☄‍ ‍ ‍ 　 "
+            "　　　　　　　　　　　　.　　　　　 　　 　　　.　　　　　　　　　　　　　 　           "
+            "　　　　　　☄　　　　　　　　　　　　　. ˚　　　 　   . ,　　　　　　　　　　　       　    "
+            "　　　　　　　　　　　　　. .　　　  　　    ✦　 ✦　　　　 　　　　　.　　　　　　　　　　　　　.　　　　"
+            "　　   　　　　　 ✦ 　　　　　　　         　        　　　　 　　 　　　　　　　 　　　　　."
+            "　　　　　　　　　　　　　　　　　　.　　　　　    　　. 　 　　　　　.　"
+            "　　　　　　　　　　　.　　　　　　　　　　   　 　˚　　🌛 . ✦ ✦　　　　　　　　　　　　　　　　　　　ﾟ"
+            "　　　　　.　　　　　　　　　　　　　　　. 　　 　 🌎 ‍ ‍ ‍ ‍ ‍ ‍ ‍ ‍ ‍ ‍ ,　 　　　　　　　　　　　　　　* .　　　　　"
+            "　　　　　　　　　　　　　　.　　　　　　　　　　 ✦ 　　　　   　 　　　˚　　　　　　　　　　　　　　*"
+            "　　　　　　   　　　　　　　　　　　　　　　.　　　　　　　　　　　　　　 ✦"))
+         (longest-line (apply #'max (mapcar #'length banner))))
+    (put-text-property
+     (point)
+     (dolist (line banner (point))
+       (insert (+doom-dashboard--center
+                +doom-dashboard--width
+                (concat
+                 line (make-string (max 0 (- longest-line (length line)))
+                                   32)))
+               "\n"))
+     'face 'doom-dashboard-banner)))
+
+(setq +doom-dashboard-functions (cdr +doom-dashboard-functions))
+(push 'doom-dashboard-draw-custom-ascii-banner-fn +doom-dashboard-functions)
