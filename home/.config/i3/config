@@ -28,8 +28,9 @@ set_from_resource $borderunfocused color1 #9ea8a1
 set_from_resource $borderfocused color10 #c0c4c2
 
 # set some nice colors      border     background  text
-client.focused              $borderfocused  $borderfocused $borderfocused
-client.unfocused            $borderunfocused $borderunfocused $borderunfocused
+client.focused              $borderfocused  $borderfocused $borderfocused $borderfocused $borderfocused
+client.unfocused            $borderunfocused $borderunfocused $borderunfocused $borderunfocused $borderunfocused
+
 
 # Gaps
 smart_gaps on
