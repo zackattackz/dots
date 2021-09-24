@@ -13,6 +13,7 @@ mopidy &
 nvidia-settings --load-config-only
 fcitx &
 guake &
+guake --restore-preferences ~/.config/guake/prefs
 if [[ "$SESSION_TYPE" == "i3" ]]; then
 	picom &
 	blueberry-tray &
