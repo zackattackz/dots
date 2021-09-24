@@ -11,4 +11,6 @@ blueberry-tray &
 picom &
 $HOME/.config/dunst/launchdunst.sh
 fcitx &
+guake &
+guake --restore-preferences ~/.config/guake/prefs
 exec i3
