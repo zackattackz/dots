@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export DISPLAY=$(cat "$TURNSTILE_ENV_DIR/DISPLAY")
+XTTY=$(cat "$TURNSTILE_ENV_DIR/XTTY")
 [ -z "$DISPLAY" ] && exit 1
 
 terminate() {
@@ -12,6 +13,6 @@ PGID=$(ps -o pgid= "$$")
 trap terminate HUP INT TERM
 xset +dpms dpms 5 5 5
 {  slock; terminate; } &
-{ while true; do sleep 180 && sudo /usr/bin/zzz > /dev/null; done } &
-{ while true; do sleep 10 && xset +dpms 5 5 5; done } &
+{ while true; do sleep 180 && [ "$(cat /sys/devices/virtual/tty/tty0/active)" = "$XTTY" ] && sudo /usr/bin/zzz > /dev/null; done } &
+{ while true; do sleep 10 && xset +dpms dpms 5 5 5; done } &
 exec pause

@@ -1,7 +1,7 @@
 picom &
 xsetstatus &
 alttab -w 1 -font 'xft:Iosevka-10' -d 1 -b 0 &
-turnstile-update-runit-env DISPLAY
+turnstile-update-runit-env DISPLAY XTTY="$(cat /sys/devices/virtual/tty/tty0/active)"
 usv up pipewire xautolock
 xset s off
 xset -dpms
