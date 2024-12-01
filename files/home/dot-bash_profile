@@ -1,0 +1,5 @@
+export PATH="$HOME/.local/bin:$PATH"
+FROM_BASHPROFILE=1 source "$HOME/.bashrc"
+if [ "$(tty)" = "/dev/tty1" ]; then
+    exec startx
+fi

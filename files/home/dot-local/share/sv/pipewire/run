@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ -r ./conf ] && . ./conf
+
+exec 2>&1
+SVDIR=".." sv check dbus >/dev/null || exit 1
+GRAPHICAL_STATUS=$(SVDIR=".." sv status graphical | cut -d: -f1)
+[ "$GRAPHICAL_STATUS" != 'down' ] || exit 1
+
+exec chpst -e "$TURNSTILE_ENV_DIR" pipewire $OPTS

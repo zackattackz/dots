@@ -1,0 +1,3 @@
+#!/bin/sh
+
+SVDIR="$HOME/.config/service" sv $@

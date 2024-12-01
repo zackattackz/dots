@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ -r ./conf ] && . ./conf
+
+exec 2>&1
+PIPEWIRE_STATUS=$(SVDIR=".." sv status pipewire | cut -d: -f1)
+[ "$PIPEWIRE_STATUS" != 'down' ] && SVDIR=".." sv check pipewire >/dev/null || exit 1
+WIREPLUMBER_STATUS=$(SVDIR=".." sv status wireplumber | cut -d: -f1)
+[ "$WIREPLUMBER_STATUS" != 'down' ] && SVDIR=".." sv check wireplumber >/dev/null || exit 1
+
+exec chpst -e "$TURNSTILE_ENV_DIR" pipewire-pulse $OPTS

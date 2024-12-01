@@ -1,0 +1,23 @@
+#!/bin/sh
+findChildProcesses()
+{
+    CHILDREN=$(pgrep -P $1)
+    if [ -n "$CHILDREN" ]; then
+        echo $CHILDREN
+    fi
+    for PID in $CHILDREN; do
+        findChildProcesses $PID
+    done
+}
+revert() {
+  xset -dpms
+  kill -TERM "$ZZZPID" $(findChildProcesses "$ZZZPID") "$XSETPID" $(findChildProcesses "$XSETPID")
+}
+trap revert HUP INT TERM
+xset +dpms dpms 5 5 5
+( while true; do sleep 180 && sudo /usr/bin/zzz > /dev/null; done ) &
+ZZZPID=$!
+( while true; do sleep 10 && xset +dpms 5 5 5; done ) &
+XSETPID=$!
+slock
+revert
