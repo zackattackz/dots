@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chpst -e "$TURNSTILE_ENV_DIR" xautolock -notify 5 -time 10 -notifier "herbe 'Screen locking...'" -locker 'LOCKPID=$(SVDIR=.. sv start lockscreen | sed -n "s/.*pid \([0-9]\+\).*/\1/p"); waitpid "$LOCKPID"' -corners -000 -cornersize 10

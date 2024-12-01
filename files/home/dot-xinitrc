@@ -1,10 +1,10 @@
 picom &
 xsetstatus &
 alttab -w 1 -font 'xft:Iosevka-10' -d 1 -b 0 &
-usv up pipewire
-xautolock -notify 5 -time 10 -notifier "herbe 'Screen locking...'" -locker lockscreen -corners -000 -cornersize 10 &
+turnstile-update-runit-env DISPLAY
+usv up pipewire xautolock
 xset s off
 xset -dpms
 dwm
-usv down pipewire pipewire-pulse wireplumber
+usv down pipewire pipewire-pulse wireplumber lockscreen xautolock
 usv up pipewire-pulse wireplumber

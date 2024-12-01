@@ -1,0 +1,17 @@
+#!/bin/sh
+
+export DISPLAY=$(cat "$TURNSTILE_ENV_DIR/DISPLAY")
+[ -z "$DISPLAY" ] && exit 1
+
+terminate() {
+    xset -dpms
+    SVDIR=".." sv down lockscreen
+    kill -TERM "-$PGID"
+}
+PGID=$(ps -o pgid= "$$")
+trap terminate HUP INT TERM
+xset +dpms dpms 5 5 5
+{  slock; terminate; } &
+{ while true; do sleep 180 && sudo /usr/bin/zzz > /dev/null; done } &
+{ while true; do sleep 10 && xset +dpms 5 5 5; done } &
+exec pause
