@@ -1,0 +1,8 @@
+#!/bin/sh
+[ "$VARSMODE" = 'perms' ] && echo 'root:root;u=rw,g=r,o=r'
+[ "$VARSMODE" = 't' ] && [ -n "$CFG_UNAGI" ] && cat << EOF
+ROOTUUID
+:----:
+9e8f8b27-6774-42d8-9029-16831151a945
+EOF
+exit 0
