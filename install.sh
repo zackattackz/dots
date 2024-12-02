@@ -73,3 +73,6 @@ make_links 'home' "$HOME/"
 make_links 'system' '/' 'sudo'
 enable_svs
 enable_usr_svs
+for PKGSCRIPT in pkgs/*/post-install.sh; do
+  . "$PKGSCRIPT"
+done
