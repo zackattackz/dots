@@ -1,6 +1,8 @@
 [[ $- != *i* ]] && return
 if [[ -z "$TMUX" ]] && [[ "$(tty)" != "/dev/tty1" ]]; then
-    TMUX_SESSIONS=$(tmux ls -F '#S:#{?session_attached,y,}' 2>/dev/null | grep -E 'main-[0-9]+:y$' 2>/dev/null)
+    UNATTACHED_TMUX_SESSION=$(tmux ls -F '#S' -f '#{?session_attached,,1}' 2>/dev/null | head -n1)
+    [[ -n "$UNATTACHED_TMUX_SESSION" ]] && exec tmux attach-session -t "$UNATTACHED_TMUX_SESSION"
+    TMUX_SESSIONS=$(tmux ls -f '#{session_attached}' 2>/dev/null)
     if [[ -z "$TMUX_SESSIONS" ]]; then
         exec tmux new-session -t main
     else
