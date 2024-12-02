@@ -16,6 +16,7 @@ make_dots() {
 make_links() {
   find "out/$1" -type f | while read -r DOTFILE; do
     awk 'NF {exit 1}' "$DOTFILE" && continue #skip empty files
+    [ "${DOTS#*$DOTFILE}" = "$DOTS" ] && continue
     RELFILE=$(echo "$DOTFILE" | sed 's|dot-|\.|g' | cut -d/ -f3-)
     LINKNAME="${2}${RELFILE}"
     TARGET=$(realpath "$DOTFILE")
