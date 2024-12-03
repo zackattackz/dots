@@ -1,0 +1,35 @@
+#!/bin/sh
+
+switchsession() {
+    tmux attach-session -t "$1"
+}
+
+killsession() {
+    tmux kill-session -t "$1"
+}
+
+case "$1" in
+    'ss')
+        INPUT=$(tmux list-sessions -F '#S' -f '#{?session_attached,,1}')
+        PROMPT='switch session:'
+        ACTION=switchsession
+        ;;
+    'ks')
+        INPUT=$(tmux list-sessions -F '#S')
+        PROMPT='kill session:'
+        ACTION=killsession
+        ;;
+    *)
+        echo "$0: Bad input $1" >&2
+        exit 1
+        ;;
+esac
+
+[ -z "$INPUT" ] && echo "No results" >&2 && exit 2
+LINES=$(echo "$INPUT" | wc -l)
+CHOICE=$(echo "$INPUT" | dmenu -p "$PROMPT" -l "$LINES" -w "$WINDOWID")
+if [ $? = 0 ] && [ -n "$CHOICE" ]; then
+    echo "$CHOICE" | $ACTION
+    exit $?
+fi
+exit 1
