@@ -66,7 +66,7 @@ enable_usr_svs() {
     $DRY touch "$HOME/.config/service/$SV_NAME/down"
   done
 }
-make clean
+make -s clean
 BACKUPDIR="$HOME/.local/share/dots-backup/$(date -u +%Y-%m-%dT%H:%M:%S%Z)"
 . "$1"
 for PKGSCRIPT in pkgs/*/pre-install.sh; do

@@ -8,7 +8,7 @@ do_diffs() {
     done
 }
 
-make dots > /dev/null
+make -s dots
 do_diffs home /home/z
 do_diffs system '' sudo
-make clean > /dev/null
+make -s clean
