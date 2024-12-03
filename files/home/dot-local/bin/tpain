@@ -1,0 +1,12 @@
+#!/bin/sh
+
+TARGET="$1"
+
+[ -z "$TARGET" ] && TARGET=$(tmux display-message -p '#S')
+
+INFO=$(tmux display-message -p -t "$TARGET" '#{?scroll_position,#{scroll_position},0}:#{pane_height}')
+POS=$(echo "$INFO" | cut -d':' -f1)
+HEIGHT=$(echo "$INFO" | cut -d':' -f2)
+
+# 0 - pos , height - 1 - pos
+tmux capture-pane -p -t "$TARGET" -S "$((0 - $POS))" -E "$(($HEIGHT - $POS - 1))"
