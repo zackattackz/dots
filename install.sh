@@ -29,7 +29,11 @@ make_links() {
       $DRY mkdir -p "$BACKUPFILEDIR"
       $DRY $3 cp "$LINKNAME" "$BACKUPFILEDIR"
     fi
-    [ "$ARESAME" != 0 ] && $DRY $3 mkdir -p "$(dirname "$LINKNAME")" && $DRY $3 cp "$TARGET" "$LINKNAME"
+    if [ "$ARESAME" != 0 ]; then
+        $DRY echo "Writing $LINKNAME"
+        $DRY $3 mkdir -p "$(dirname "$LINKNAME")"
+        $DRY $3 cp "$TARGET" "$LINKNAME"
+    fi
     VARSFILE="vars/$1/$RELFILE"
     if [ -f "$VARSFILE" ]; then
       export VARSMODE='perms'
