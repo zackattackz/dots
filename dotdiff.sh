@@ -11,3 +11,4 @@ do_diffs() {
 make dots > /dev/null
 do_diffs home /home/z
 do_diffs system '' sudo
+make clean > /dev/null
