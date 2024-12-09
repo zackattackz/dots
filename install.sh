@@ -3,7 +3,7 @@ set -e
 
 install_pkgs() {
   set -f
-  $DRY $PKG_INSTALL_CMD $PKG_TO_INSTALL > /dev/null
+  $DRY $PKG_INSTALL_CMD $PKG_TO_INSTALL
   set +f
 }
 
