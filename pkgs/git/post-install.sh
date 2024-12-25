@@ -15,3 +15,4 @@ $DRY git config --global alias.ls ls-files
 $DRY git config --global alias.p push
 $DRY git config --global alias.f fetch
 $DRY git config --global alias.l pull
+$DRY git config --global core.excludesfile "$HOME/.config/git/ignore"
