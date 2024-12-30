@@ -16,6 +16,9 @@ dry:
 unagi:
 	sh install.sh configs/unagi.sh
 
+okami:
+	sh install.sh configs/okami.sh
+
 shellcheck:
 	find . -type f -name '*.sh' | while read -r name; do \
 	 	shellcheck -e1090,2086,1091 "$$name"; \
@@ -34,4 +37,4 @@ $(OUT_DIR)/%: $(FILES_DIR)/%
 clean:
 	rm -rf $(OUT_DIR)
 
-.PHONY: default dots clean unagi
+.PHONY: default dots clean unagi okami
