@@ -5,6 +5,7 @@ turnstile-update-runit-env DISPLAY XTTY="$(cat /sys/devices/virtual/tty/tty0/act
 usv up pipewire xautolock
 xset s off
 xset -dpms
+{{AUTORANDR_LOAD_CMD}}
 dwm
 usv down pipewire pipewire-pulse wireplumber lockscreen xautolock
 usv up pipewire-pulse wireplumber

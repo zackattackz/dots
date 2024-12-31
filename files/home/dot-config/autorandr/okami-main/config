@@ -1,0 +1,12 @@
+output DVI-D-0
+off
+output DP-1
+off
+output HDMI-0
+off
+output DP-0
+crtc 0
+mode 3440x1440
+pos 0x0
+rate 99.98
+x-prop-non_desktop 0

@@ -1,0 +1,8 @@
+#!/bin/sh
+[ "$VARSMODE" = 'perms' ] && echo 'z:z;u=rw,g=r,o=r'
+[ "$VARSMODE" = 't' ] && [ -n "$CFG_AUTORANDR" ] && cat << EOF
+AUTORANDR_LOAD_CMD
+:----:
+autorandr --load DEFAULT
+EOF
+exit 0
